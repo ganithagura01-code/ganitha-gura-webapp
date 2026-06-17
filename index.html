@@ -363,6 +363,33 @@
             console.error(e);
         }
 
+        // 2. NOTIFY.LK SMS ENGINE INTEGRATION
+        function sendNotifySMS(phoneNumber, messageText) {
+            const userId = "32064"; 
+            const apiKey = "0k8OYRlm8nMQNoGbqyJa"; 
+            const senderId = "NotifyDEMO"; 
+
+            let formattedNumber = phoneNumber.trim();
+            if (formattedNumber.startsWith("0")) {
+                formattedNumber = "94" + formattedNumber.substring(1);
+            } else if (formattedNumber.startsWith("+")) {
+                formattedNumber = formattedNumber.replace("+", "");
+            }
+
+            const apiUrl = `https://app.notify.lk/api/v1/send?to=${formattedNumber}&message=${encodeURIComponent(messageText)}&user_id=${userId}&api_key=${apiKey}&sender_id=${senderId}`;
+
+            fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "success") {
+                    console.log("SMS sent successfully via Notify.lk!");
+                } else {
+                    console.error("Notify.lk Error:", data.message);
+                }
+            })
+            .catch(error => console.error("SMS Network Error:", error));
+        }
+
         let allStudents = [];
         let allLessons = [];
         let loggedInStudent = null;
@@ -379,7 +406,7 @@
                 .replace(/'/g, "&#039;");
         }
 
-        // 2. REALTIME ENGINE LISTENERS
+        // 3. REALTIME ENGINE LISTENERS
         document.addEventListener("DOMContentLoaded", () => {
             if (!db) return;
 
@@ -484,7 +511,7 @@
             }
         }
 
-        // REGISTRATION SYSTEM
+        // REGISTRATION SYSTEM WITH AUTOMATIC SMS
         async function handleRegistration(e) {
             e.preventDefault();
             const name = document.getElementById('regName').value.trim();
@@ -523,6 +550,17 @@
                 
                 document.getElementById('successModal').classList.remove('hidden');
                 document.getElementById('regForm').reset();
+
+                // 🔔 ස්වයංක්‍රීයව ලියාපදිංචි වීමේ SMS එක යැවීම
+                if (phone) {
+                    const regMessage = `ගණිත ගුරු පන්ති පද්ධතිය:\n` +
+                                       `• ලියාපදිංචිය සාර්ථකයි!\n` +
+                                       `• ශිෂ්‍ය අංකය (ID): ${nextId}\n` +
+                                       `• සිසුවා: ${name}\n` +
+                                       `• ශ්‍රේණිය: ${grade} ශ්‍රේණිය\n\n` +
+                                       `මෙම ශිෂ්‍ය අංකය භාවිත කර පද්ධතියට ඇතුල් වන්න.\n• GURUGE MATHS CLASS •`;
+                    sendNotifySMS(phone, regMessage);
+                }
             } catch (err) {
                 console.error(err);
             }
@@ -676,6 +714,7 @@
             });
         }
 
+        // ATTENDANCE MARKING WITH AUTOMATIC SMS
         function toggleAttendance(studentId) {
             const student = allStudents.find(s => s.id === studentId);
             if (!student) return;
@@ -684,12 +723,30 @@
             const todayStr = new Date().toISOString().split('T')[0];
             const dateIndex = attendance.indexOf(todayStr);
 
-            if (dateIndex > -1) attendance.splice(dateIndex, 1);
-            else attendance.push(todayStr);
+            let isMarkedPresent = false;
+            if (dateIndex > -1) {
+                attendance.splice(dateIndex, 1);
+            } else {
+                attendance.push(todayStr);
+                isMarkedPresent = true;
+            }
 
-            db.ref("students/" + studentId).update({ attendance: attendance });
+            db.ref("students/" + studentId).update({ attendance: attendance }).then(() => {
+                // 🔔 සිසුවා පැමිණි බව සලකුණු කළ විට පමණක් දෙමාපියන්ට SMS එකක් යවයි
+                if (isMarkedPresent && student.phone) {
+                    const currentBalance = student.balance !== undefined ? student.balance : 0;
+                    const attMessage = `ගණිත ගුරු පන්ති පද්ධතිය:\n` +
+                                       `• සිසුවා: ${student.name}\n` +
+                                       `• ශ්‍රේණිය: ${student.grade} ශ්‍රේණිය\n` +
+                                       `• පැමිණීම: අද දින පන්තියට පැමිණ ඇත.\n` +
+                                       `• හිඟ මුදල: රු. ${currentBalance}/=\n\n` +
+                                       `• GURUGE MATHS CLASS •`;
+                    sendNotifySMS(student.phone, attMessage);
+                }
+            });
         }
 
+        // PAYMENT SYSTEM WITH AUTOMATIC SMS RECEIPT
         function addPaymentPrompt(studentId) {
             const student = allStudents.find(s => s.id === studentId);
             if (!student) return;
@@ -703,7 +760,17 @@
             let amountPaid = (student.amountPaid || 0) + amount;
             let balance = (student.totalDue || 0) - amountPaid;
 
-            db.ref("students/" + studentId).update({ amountPaid, balance });
+            db.ref("students/" + studentId).update({ amountPaid, balance }).then(() => {
+                // 🔔 ගෙවීම් සාර්ථක වූ පසු දෙමාපියන්ට SMS රිසිට්පත යැවීම
+                if (student.phone) {
+                    const payMessage = `ගණිත ගුරු පන්ති පද්ධතිය:\n` +
+                                       `• සිසුවා: ${student.name}\n` +
+                                       `• ගෙවූ මුදල: රු. ${amount}/=\n` +
+                                       `• ඉතිරි හිඟ මුදල: රු. ${balance}/=\n\n` +
+                                       `ස්තූතියි!\n• GURUGE MATHS CLASS •`;
+                    sendNotifySMS(student.phone, payMessage);
+                }
+            });
         }
 
         function editTotalDuePrompt(studentId) {
