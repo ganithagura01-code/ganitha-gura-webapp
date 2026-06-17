@@ -365,29 +365,27 @@
 
         // 2. NOTIFY.LK SMS ENGINE INTEGRATION
         function sendNotifySMS(phoneNumber, messageText) {
-            const userId = "32064"; 
-            const apiKey = "0k8OYRlm8nMQNoGbqyJa"; 
-            const senderId = "NotifyDEMO"; 
+    // පියවර 1 හිදී ඔබට ලැබුණු Google Web App URL එක පහතින් පේස්ට් කරන්න
+    const proxyUrl = "https://script.google.com/macros/s/AKfycbw-cTmq4T53uvS8fqHUAIpMPXhYr-Suij4IPUIlFNcLuESQQT8gUU0iwbjlm2otaC7LxQ/exec";
 
-            let formattedNumber = phoneNumber.trim();
-            if (formattedNumber.startsWith("0")) {
-                formattedNumber = "94" + formattedNumber.substring(1);
-            } else if (formattedNumber.startsWith("+")) {
-                formattedNumber = formattedNumber.replace("+", "");
-            }
 
-            const apiUrl = `https://app.notify.lk/api/v1/send?to=${formattedNumber}&message=${encodeURIComponent(messageText)}&user_id=${userId}&api_key=${apiKey}&sender_id=${senderId}`;
+    let formattedNumber = phoneNumber.trim();
+    if (formattedNumber.startsWith("0")) {
+        formattedNumber = "94" + formattedNumber.substring(1);
+    } else if (formattedNumber.startsWith("+")) {
+        formattedNumber = formattedNumber.replace("+", "");
+    }
 
-            fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if(data.status === "success") {
-                    console.log("SMS sent successfully via Notify.lk!");
-                } else {
-                    console.error("Notify.lk Error:", data.message);
-                }
-            })
-            .catch(error => console.error("SMS Network Error:", error));
+    // CORS බ්ලොක් වීම වැළැක්වීම සඳහා ආරක්ෂිතව Google Script වෙත දත්ත යැවීම
+    fetch(proxyUrl, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify({ phoneNumber: formattedNumber, message: messageText })
+    })
+    .then(response => console.log("SMS එක සාර්ථකව Google සර්වර් එක වෙත යොමු කරන ලදී!"))
+    .catch(error => console.error("SMS Error:", error));
+}
+
         }
 
         let allStudents = [];
