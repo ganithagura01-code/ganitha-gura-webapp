@@ -16,58 +16,142 @@
 
     <!-- NAVIGATION -->
     <nav class="bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <h1 class="font-bold text-lg text-indigo-400">GANITHA-GURA</h1>
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="font-bold text-xl text-indigo-400">GANITHA-GURA</h1>
             <div class="flex gap-2">
-                <button onclick="switchTab('view-home')" class="px-4 py-2 bg-slate-800 rounded text-sm cursor-pointer hover:bg-slate-700">REGISTER</button>
-                <button onclick="switchTab('view-student-portal')" class="px-4 py-2 bg-slate-800 rounded text-sm cursor-pointer hover:bg-slate-700">STUDENT</button>
-                <button onclick="switchTab('view-admin-dashboard')" class="px-4 py-2 bg-slate-800 rounded text-sm cursor-pointer hover:bg-slate-700">TEACHER</button>
+                <button onclick="switchTab('view-home')" class="px-4 py-2 bg-slate-800 rounded text-sm hover:bg-slate-700">ලියාපදිංචිය</button>
+                <button onclick="switchTab('view-student-portal')" class="px-4 py-2 bg-slate-800 rounded text-sm hover:bg-slate-700">ශිෂ්‍ය ද්වාරය</button>
+                <button onclick="switchTab('view-admin-dashboard')" class="px-4 py-2 bg-slate-800 rounded text-sm hover:bg-slate-700">ගුරු මණ්ඩලය</button>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto p-6">
+    <main class="max-w-5xl mx-auto p-6">
         
-        <!-- 1. REGISTRATION -->
+        <!-- ================= 1. REGISTRATION ================= -->
         <section id="view-home">
-            <h2 class="text-xl font-bold mb-4">සිසුන් ලියාපදිංචිය</h2>
-            <form id="regForm" onsubmit="handleRegistration(event)" class="bg-slate-900 p-6 rounded-xl space-y-4">
-                <input type="text" id="regName" required placeholder="නම" class="w-full p-3 bg-slate-950 border border-slate-700 rounded text-white">
+            <h2 class="text-2xl font-bold mb-6 text-center">නව සිසුන් ලියාපදිංචිය</h2>
+            <form id="regForm" onsubmit="handleRegistration(event)" class="bg-slate-900 p-8 rounded-xl space-y-4 max-w-xl mx-auto border border-slate-800">
+                <input type="text" id="regName" required placeholder="ශිෂ්‍යයාගේ නම" class="w-full p-3 bg-slate-950 border border-slate-700 rounded text-white">
                 <select id="regGrade" class="w-full p-3 bg-slate-950 border border-slate-700 rounded text-white">
                     <option value="6">6 ශ්‍රේණිය</option><option value="7">7 ශ්‍රේණිය</option><option value="8">8 ශ්‍රේණිය</option>
                     <option value="9">9 ශ්‍රේණිය</option><option value="10">10 ශ්‍රේණිය</option><option value="11">11 ශ්‍රේණිය</option>
                 </select>
                 <input type="text" id="regSchool" required placeholder="පාසල" class="w-full p-3 bg-slate-950 border border-slate-700 rounded text-white">
                 <input type="tel" id="regPhone" required placeholder="දුරකථන අංකය" class="w-full p-3 bg-slate-950 border border-slate-700 rounded text-white">
-                <button type="submit" class="w-full bg-indigo-600 py-3 rounded font-bold cursor-pointer hover:bg-indigo-500">ලියාපදිංචි වන්න</button>
+                <button type="submit" class="w-full bg-indigo-600 py-3 rounded font-bold hover:bg-indigo-500">ලියාපදිංචි වන්න</button>
             </form>
         </section>
 
-        <!-- 2. STUDENT PORTAL -->
+        <!-- ================= 2. STUDENT PORTAL ================= -->
         <section id="view-student-portal" class="hidden">
-            <div id="studentLoginBox" class="bg-slate-900 p-6 rounded-xl">
-                <input type="text" id="studentLoginId" placeholder="GG-XXXX" class="w-full p-3 bg-slate-950 border border-slate-700 rounded text-white">
-                <button onclick="handleStudentLogin()" class="w-full bg-indigo-600 mt-3 py-3 rounded font-bold cursor-pointer hover:bg-indigo-500">පිවිසෙන්න</button>
+            <h2 class="text-2xl font-bold mb-6 text-center">ශිෂ්‍ය පිවිසුම</h2>
+            
+            <!-- Login Box -->
+            <div id="studentLoginBox" class="bg-slate-900 p-8 rounded-xl max-w-md mx-auto border border-slate-800">
+                <p class="mb-4 text-sm text-slate-400 text-center">ඔබේ ලියාපදිංචි අංකය ඇතුළත් කරන්න (උදා: GG-1234)</p>
+                <input type="text" id="studentLoginId" placeholder="GG-XXXX" class="w-full p-3 bg-slate-950 border border-slate-700 rounded text-white text-center text-xl font-bold uppercase">
+                <button onclick="handleStudentLogin()" class="w-full bg-indigo-600 mt-4 py-3 rounded font-bold hover:bg-indigo-500">පිවිසෙන්න</button>
             </div>
-            <div id="student-dashboard" class="hidden bg-slate-900 p-6 rounded-xl mt-4"></div>
+
+            <!-- Student Dashboard (Shows Lessons) -->
+            <div id="student-dashboard" class="hidden space-y-6">
+                <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-indigo-400" id="studentWelcomeName"></h3>
+                        <p class="text-sm text-slate-400" id="studentGradeInfo"></p>
+                    </div>
+                    <button onclick="studentLogout()" class="bg-slate-700 px-4 py-2 rounded text-sm hover:bg-slate-600">ඉවත් වන්න</button>
+                </div>
+                
+                <h3 class="text-xl font-bold mt-8 border-b border-slate-700 pb-2">ඔබේ පාඩම් මාලාව</h3>
+                <div id="studentLessonsArea" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Lessons will load here -->
+                </div>
+            </div>
         </section>
 
-        <!-- 3. ADMIN / TEACHER -->
-        <section id="view-admin-dashboard" class="hidden space-y-4">
-            <div id="admin-login-area">
-                <input type="email" id="adminEmail" placeholder="Email" class="w-full p-3 bg-slate-900 border border-slate-700 rounded text-white">
-                <input type="password" id="adminPassword" placeholder="Password" class="w-full p-3 bg-slate-900 border border-slate-700 rounded mt-2 text-white">
-                <button onclick="loginAdmin()" class="w-full bg-cyan-600 mt-2 py-3 rounded cursor-pointer hover:bg-cyan-500">LOGIN</button>
+        <!-- ================= 3. ADMIN / TEACHER PORTAL ================= -->
+        <section id="view-admin-dashboard" class="hidden space-y-6">
+            
+            <!-- Admin Login -->
+            <div id="admin-login-area" class="bg-slate-900 p-8 rounded-xl max-w-md mx-auto border border-slate-800">
+                <h2 class="text-xl font-bold mb-4 text-center">ගුරු පිවිසුම</h2>
+                <input type="email" id="adminEmail" placeholder="Email Address" class="w-full p-3 bg-slate-950 border border-slate-700 rounded text-white">
+                <input type="password" id="adminPassword" placeholder="Password" class="w-full p-3 bg-slate-950 border border-slate-700 rounded mt-4 text-white">
+                <button onclick="loginAdmin()" class="w-full bg-cyan-600 mt-4 py-3 rounded font-bold hover:bg-cyan-500">සම්බන්ධ වන්න</button>
             </div>
-            <div id="admin-panel" class="hidden">
-                <button onclick="logoutAdmin()" class="bg-red-600 px-4 py-2 rounded text-sm cursor-pointer">Logout</button>
-                <div id="studentsTableBody" class="mt-4 bg-slate-900 p-4 rounded-xl"></div>
+
+            <!-- Admin Full Dashboard -->
+            <div id="admin-panel" class="hidden space-y-8">
+                <div class="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-800">
+                    <h2 class="text-xl font-bold text-cyan-400">පාලක පුවරුව (Admin Dashboard)</h2>
+                    <button onclick="logoutAdmin()" class="bg-red-600 px-4 py-2 rounded font-bold hover:bg-red-500">Logout</button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- COLUMN 1: Add Lessons Form -->
+                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 lg:col-span-1 h-fit">
+                        <h3 class="font-bold text-lg mb-4"><i class="fa-solid fa-book-open mr-2"></i> නව පාඩමක් ඇතුළත් කරන්න</h3>
+                        <form onsubmit="addLesson(event)" class="space-y-4">
+                            <input type="text" id="lesTitle" required placeholder="පාඩමේ නම" class="w-full p-2 bg-slate-950 border border-slate-700 rounded">
+                            <input type="url" id="lesLink" required placeholder="වීඩියෝ ලින්ක් එක (YouTube URL)" class="w-full p-2 bg-slate-950 border border-slate-700 rounded">
+                            <select id="lesGrade" class="w-full p-2 bg-slate-950 border border-slate-700 rounded">
+                                <option value="6">6 ශ්‍රේණිය</option><option value="7">7 ශ්‍රේණිය</option><option value="8">8 ශ්‍රේණිය</option>
+                                <option value="9">9 ශ්‍රේණිය</option><option value="10">10 ශ්‍රේණිය</option><option value="11">11 ශ්‍රේණිය</option>
+                            </select>
+                            <button type="submit" class="w-full bg-green-600 py-2 rounded font-bold hover:bg-green-500">පාඩම පබ්ලිෂ් කරන්න</button>
+                        </form>
+                    </div>
+
+                    <!-- COLUMN 2: Students & Lessons Tables -->
+                    <div class="lg:col-span-2 space-y-6">
+                        
+                        <!-- Lessons Table -->
+                        <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+                            <h3 class="font-bold text-lg mb-4 text-green-400">ඇතුළත් කර ඇති පාඩම්</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm text-left">
+                                    <thead class="bg-slate-800 text-slate-300">
+                                        <tr>
+                                            <th class="p-3 rounded-tl-lg">ශ්‍රේණිය</th>
+                                            <th class="p-3">පාඩම</th>
+                                            <th class="p-3 rounded-tr-lg">ක්‍රියාව</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminLessonsTableBody" class="divide-y divide-slate-800"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Students Table -->
+                        <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+                            <h3 class="font-bold text-lg mb-4 text-indigo-400">ලියාපදිංචි සිසුන්</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm text-left">
+                                    <thead class="bg-slate-800 text-slate-300">
+                                        <tr>
+                                            <th class="p-3 rounded-tl-lg">ID</th>
+                                            <th class="p-3">නම</th>
+                                            <th class="p-3">ශ්‍රේණිය</th>
+                                            <th class="p-3">දුරකථන</th>
+                                            <th class="p-3 rounded-tr-lg">ක්‍රියාව</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminStudentsTableBody" class="divide-y divide-slate-800"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <script>
-        // CONFIG
+        // --- 1. FIREBASE SETUP ---
         const firebaseConfig = {
            apiKey: "AIzaSyDqH2onBtKBcF9Yccpt7fHDNZOwcJDRIDk",
            authDomain: "ganitha-gura.firebaseapp.com",
@@ -79,8 +163,9 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
+        const auth = firebase.auth();
 
-        // NAV
+        // --- 2. NAVIGATION ---
         function switchTab(tabId) {
             ['view-home', 'view-student-portal', 'view-admin-dashboard'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
@@ -88,7 +173,7 @@
             document.getElementById(tabId).classList.remove('hidden');
         }
 
-        // REGISTRATION
+        // --- 3. STUDENT REGISTRATION ---
         function handleRegistration(e) {
             e.preventDefault();
             const id = "GG-" + Math.floor(1000 + Math.random() * 9000);
@@ -96,46 +181,157 @@
                 name: document.getElementById('regName').value,
                 grade: document.getElementById('regGrade').value,
                 school: document.getElementById('regSchool').value,
-                phone: document.getElementById('regPhone').value
+                phone: document.getElementById('regPhone').value,
+                registeredAt: new Date().toISOString()
             };
-            db.ref('students/' + id).set(data).then(() => alert("සාර්ථකයි! ඔබේ අංකය: " + id));
+            db.ref('students/' + id).set(data).then(() => {
+                alert(`ලියාපදිංචිය සාර්ථකයි! \nඔබේ පිවිසුම් අංකය: ${id}\nකරුණාකර මෙය මතක තබා ගන්න.`);
+                document.getElementById('regForm').reset();
+            }).catch(error => alert("දෝෂයක්: " + error.message));
         }
 
-        // STUDENT LOGIN
+        // --- 4. STUDENT PORTAL (LOGIN & VIEW LESSONS) ---
+        let currentStudentGrade = null;
+
         function handleStudentLogin() {
-            const id = document.getElementById('studentLoginId').value;
+            const id = document.getElementById('studentLoginId').value.trim().toUpperCase();
+            if(!id) return alert("කරුණාකර අංකය ඇතුළත් කරන්න");
+
             db.ref('students/' + id).once('value').then(snap => {
                 if(snap.exists()) {
-                    document.getElementById('student-dashboard').innerHTML = `<p class="text-lg">ආයුබෝවන්, ${snap.val().name}</p><p>පන්ති අංකය: ${id}</p>`;
-                    document.getElementById('student-dashboard').classList.remove('hidden');
+                    const student = snap.val();
+                    currentStudentGrade = student.grade;
+                    
+                    // Show Dashboard
+                    document.getElementById('studentWelcomeName').innerText = `ආයුබෝවන්, ${student.name}!`;
+                    document.getElementById('studentGradeInfo').innerText = `ශ්‍රේණිය: ${student.grade} | පාසල: ${student.school}`;
                     document.getElementById('studentLoginBox').classList.add('hidden');
-                } else alert("වැරදි අංකයකි!");
+                    document.getElementById('student-dashboard').classList.remove('hidden');
+                    
+                    // Load Lessons for this grade
+                    loadStudentLessons(student.grade);
+                } else {
+                    alert("ඔබ ඇතුළත් කළ අංකය වැරදියි. කරුණාකර නැවත පරීක්ෂා කරන්න.");
+                }
             });
         }
 
-        // ADMIN LOGIN
+        function studentLogout() {
+            document.getElementById('studentLoginId').value = '';
+            document.getElementById('student-dashboard').classList.add('hidden');
+            document.getElementById('studentLoginBox').classList.remove('hidden');
+            currentStudentGrade = null;
+        }
+
+        function loadStudentLessons(grade) {
+            db.ref('lessons').orderByChild('grade').equalTo(grade).on('value', snap => {
+                const container = document.getElementById('studentLessonsArea');
+                container.innerHTML = '';
+                if(snap.exists()) {
+                    snap.forEach(child => {
+                        const lesson = child.val();
+                        container.innerHTML += `
+                            <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 hover:border-indigo-500 transition">
+                                <h4 class="font-bold text-lg mb-2 text-white">${lesson.title}</h4>
+                                <a href="${lesson.link}" target="_blank" class="inline-block bg-indigo-600 px-4 py-2 rounded text-sm font-bold mt-2 hover:bg-indigo-500"><i class="fa-solid fa-play mr-2"></i>පාඩම නරඹන්න</a>
+                            </div>
+                        `;
+                    });
+                } else {
+                    container.innerHTML = '<p class="text-slate-400">මෙම ශ්‍රේණිය සඳහා තවමත් පාඩම් ඇතුළත් කර නොමැත.</p>';
+                }
+            });
+        }
+
+        // --- 5. ADMIN AUTHENTICATION ---
         function loginAdmin() {
-            firebase.auth().signInWithEmailAndPassword(document.getElementById('adminEmail').value, document.getElementById('adminPassword').value)
-            .then(() => window.location.reload())
-            .catch(err => alert(err.message));
+            const email = document.getElementById('adminEmail').value;
+            const pass = document.getElementById('adminPassword').value;
+            auth.signInWithEmailAndPassword(email, pass).catch(err => alert("පිවිසීම අසාර්ථකයි: " + err.message));
         }
 
         function logoutAdmin() {
-            firebase.auth().signOut().then(() => window.location.reload());
+            auth.signOut();
         }
 
-        // ADMIN PANEL
-        firebase.auth().onAuthStateChanged((user) => {
+        // Check Admin State
+        auth.onAuthStateChanged((user) => {
             if (user) {
                 document.getElementById('admin-login-area').classList.add('hidden');
                 document.getElementById('admin-panel').classList.remove('hidden');
-                db.ref('students').once('value').then(snap => {
-                    let html = '<table class="w-full text-sm"><tr><th class="p-2 border-b">ID</th><th class="p-2 border-b">Name</th></tr>';
-                    snap.forEach(s => html += `<tr><td class="p-2 border-b">${s.key}</td><td class="p-2 border-b">${s.val().name}</td></tr>`);
-                    document.getElementById('studentsTableBody').innerHTML = html + '</table>';
-                });
+                loadAdminData(); // Load tables
+            } else {
+                document.getElementById('admin-login-area').classList.remove('hidden');
+                document.getElementById('admin-panel').classList.add('hidden');
             }
         });
+
+        // --- 6. ADMIN DASHBOARD DATA MANAGEMENT ---
+        
+        // Add Lesson
+        function addLesson(e) {
+            e.preventDefault();
+            const data = {
+                title: document.getElementById('lesTitle').value,
+                link: document.getElementById('lesLink').value,
+                grade: document.getElementById('lesGrade').value,
+                timestamp: new Date().getTime()
+            };
+            db.ref('lessons').push(data).then(() => {
+                alert("පාඩම සාර්ථකව ඇතුළත් කරන ලදී!");
+                e.target.reset();
+            });
+        }
+
+        // Delete Data Functions
+        function deleteLesson(key) {
+            if(confirm("මෙම පාඩම මකා දැමීමට අවශ්‍යද?")) db.ref('lessons/' + key).remove();
+        }
+
+        function deleteStudent(key) {
+            if(confirm("මෙම ශිෂ්‍යයාව පද්ධතියෙන් ඉවත් කිරීමට අවශ්‍යද?")) db.ref('students/' + key).remove();
+        }
+
+        // Load Tables Real-time
+        function loadAdminData() {
+            // Load Students Table
+            db.ref('students').on('value', snap => {
+                let html = '';
+                snap.forEach(child => {
+                    const s = child.val();
+                    html += `
+                        <tr class="hover:bg-slate-800">
+                            <td class="p-3 font-mono text-indigo-400">${child.key}</td>
+                            <td class="p-3">${s.name}</td>
+                            <td class="p-3">Grade ${s.grade}</td>
+                            <td class="p-3">${s.phone}</td>
+                            <td class="p-3">
+                                <button onclick="deleteStudent('${child.key}')" class="text-red-500 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                document.getElementById('adminStudentsTableBody').innerHTML = html;
+            });
+
+            // Load Lessons Table
+            db.ref('lessons').on('value', snap => {
+                let html = '';
+                snap.forEach(child => {
+                    const l = child.val();
+                    html += `
+                        <tr class="hover:bg-slate-800">
+                            <td class="p-3 font-bold text-slate-300">${l.grade}</td>
+                            <td class="p-3">${l.title}</td>
+                            <td class="p-3">
+                                <button onclick="deleteLesson('${child.key}')" class="text-red-500 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                document.getElementById('adminLessonsTableBody').innerHTML = html;
+            });
+        }
     </script>
 </body>
 </html>
