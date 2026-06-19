@@ -33,7 +33,6 @@
             <div class="flex flex-wrap lg:flex-nowrap items-center justify-center gap-2 bg-slate-950/60 p-1.5 rounded-xl border border-slate-800 w-full lg:w-auto">
                 <button onclick="switchTab('home')" id="tab-home" class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 bg-indigo-600 text-white shadow text-center flex flex-col items-center justify-center cursor-pointer min-w-[140px]">
                     <span>REGISTER - ලියාපදිංචි</span>
-                    <span class="text-[10px] opacity-80 font-normal mt-0.5">(නව සිසුන්)</span>
                 </button>
                 <button onclick="switchTab('student-portal')" id="tab-student-portal" class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-200 text-center flex flex-col items-center justify-center cursor-pointer min-w-[140px]">
                     <span>STUDENT - සිසුන්</span>
@@ -47,12 +46,9 @@
 
     <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
 
+        <!-- HEADER BANNER -->
         <div id="hero-banner" class="bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950/70 border border-slate-800/80 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.12),transparent_50%)]"></div>
-            <div class="absolute left-12 top-4 text-slate-800/10 text-7xl font-extrabold font-mono select-none pointer-events-none">f(x)</div>
-            <div class="absolute right-1/3 bottom-2 text-slate-800/10 text-8xl font-extrabold font-mono select-none pointer-events-none">∑</div>
-            <div class="absolute left-1/2 top-2 text-slate-800/5 text-6xl font-extrabold font-mono select-none pointer-events-none">√x</div>
-            
             <div class="flex flex-col sm:flex-row items-center gap-5 z-10 text-center sm:text-left">
                 <div class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white h-16 w-16 rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-500/30 border border-indigo-400/20 text-3xl animate-pulse">
                     <i class="fa-solid fa-calculator"></i>
@@ -66,6 +62,7 @@
             </div>
         </div>
 
+        <!-- ================= 1. HOME / REGISTRATION ================= -->
         <section id="view-home" class="space-y-8">
             <div class="grid lg:grid-cols-3 gap-8 items-start mt-8">
                 <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 space-y-4">
@@ -75,7 +72,6 @@
                     <ul class="space-y-3 text-xs sm:text-sm text-slate-400">
                         <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1 text-xs"></i> <span>සියලුම විස්තර නිවැරදිව ඇතුළත් කරන්න.</span></li>
                         <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1 text-xs"></i> <span>ලියාපදිංචි වූ පසු ලැබෙන <b>ශිෂ්‍ය අංකය (Register ID)</b> සුරක්ෂිතව තබා ගන්න.</span></li>
-                        <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1 text-xs"></i> <span>සෑම සිකුරාදා දිනකම පන්ති ගාස්තුව ලෙස රු. 300 ක් ගිණුමට එකතු වේ.</span></li>
                     </ul>
                 </div>
 
@@ -114,6 +110,7 @@
             </div>
         </section>
 
+        <!-- ================= 2. STUDENT PORTAL ================= -->
         <section id="view-student-portal" class="hidden max-w-2xl mx-auto space-y-8">
             <div id="studentLoginBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl space-y-6">
                 <div class="text-center space-y-2">
@@ -131,6 +128,7 @@
                 </form>
             </div>
 
+            <!-- Student Dashboard -->
             <div id="student-dashboard" class="hidden space-y-8">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-lg">
                     <div>
@@ -175,6 +173,7 @@
             </div>
         </section>
 
+        <!-- ================= 3. ADMIN GATE ================= -->
         <section id="view-admin-gate" class="hidden max-w-md mx-auto">
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl space-y-6">
                 <div class="text-center space-y-2">
@@ -193,6 +192,7 @@
             </div>
         </section>
 
+        <!-- ================= 4. ADMIN DASHBOARD ================= -->
         <section id="view-admin-dashboard" class="hidden space-y-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md">
                 <div>
@@ -215,6 +215,7 @@
                 </button>
             </div>
 
+            <!-- STUDENTS SUBTAB -->
             <div id="admin-subtab-students" class="space-y-6">
                 <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4">
                     <input type="text" id="adminStudentSearch" oninput="renderAdminStudentsTable()" placeholder="නම හෝ අංකය සොයන්න..." class="w-full md:w-96 bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 outline-none">
@@ -235,6 +236,7 @@
                 </div>
             </div>
 
+            <!-- LESSONS SUBTAB -->
             <div id="admin-subtab-lessons" class="hidden grid lg:grid-cols-3 gap-8 items-start">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
                     <h3 class="text-base font-bold border-b border-slate-800 pb-3 text-slate-200">
@@ -248,7 +250,7 @@
                         <div class="space-y-2">
                             <label class="text-slate-300">අදාළ ශ්‍රේණිය *</label>
                             <select id="lesGrade" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-slate-200 outline-none">
-                                <option value="" disabled selected>ශ්‍රේණිය</option>
+                                <option value="" disabled selected>ශ්‍රේණිය තෝරන්න</option>
                                 <option value="6">6 ශ්‍රේණිය</option><option value="7">7 ශ්‍රේණිය</option><option value="8">8 ශ්‍රේණිය</option>
                                 <option value="9">9 ශ්‍රේණිය</option><option value="10">10 ශ්‍රේණිය</option><option value="11">11 ශ්‍රේණිය</option>
                             </select>
@@ -276,6 +278,7 @@
         </section>
     </main>
 
+    <!-- SUCCESS MODAL -->
     <div id="successModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-sm w-full text-center space-y-6 shadow-2xl">
             <div class="bg-emerald-500/10 text-emerald-400 p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto text-2xl">
@@ -295,6 +298,7 @@
         </div>
     </div>
 
+    <!-- ================= JAVASCRIPT ================= -->
     <script>
         // 1. FIREBASE CONFIG
         const firebaseConfig = {
@@ -314,13 +318,61 @@
         let allLessons = [];
         let loggedInStudent = null;
 
-        // XSS Helper
         function escapeHTML(str) {
             if (!str) return '';
             return str.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
 
-        // 2. REALTIME LISTENERS
+        // 2. TABS FUNCTION - (FIXED CLICK ISSUE)
+        function switchTab(tabName) {
+            // Hide all pages
+            ['home', 'student-portal', 'admin-gate', 'admin-dashboard'].forEach(v => {
+                let el = document.getElementById('view-' + v);
+                if(el) el.classList.add('hidden');
+            });
+            
+            // Show correct page
+            if(tabName === 'admin-gate' && auth.currentUser) {
+                document.getElementById('view-admin-dashboard').classList.remove('hidden');
+            } else {
+                let target = document.getElementById('view-' + tabName);
+                if(target) target.classList.remove('hidden');
+            }
+            
+            // Reset button styles
+            ['home', 'student-portal', 'admin-gate'].forEach(b => {
+                let btn = document.getElementById('tab-' + b);
+                if(btn) {
+                    btn.classList.remove('bg-indigo-600', 'text-white', 'shadow');
+                    btn.classList.add('text-slate-400');
+                }
+            });
+            
+            // Highlight active button
+            let btnId = tabName === 'admin-dashboard' ? 'tab-admin-gate' : 'tab-' + tabName;
+            let activeBtn = document.getElementById(btnId);
+            if(activeBtn) {
+                activeBtn.classList.remove('text-slate-400');
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow');
+            }
+        }
+
+        // Subtabs for Admin
+        function switchAdminSubTab(subTabName) {
+            if (subTabName === 'students') {
+                document.getElementById('admin-subtab-students').classList.remove('hidden');
+                document.getElementById('admin-subtab-lessons').classList.add('hidden');
+                document.getElementById('subtab-btn-students').className = "border-b-2 border-cyan-500 px-6 py-3 font-semibold text-sm text-cyan-400 cursor-pointer";
+                document.getElementById('subtab-btn-lessons').className = "border-b-2 border-transparent px-6 py-3 font-medium text-sm text-slate-400 hover:text-slate-200 cursor-pointer";
+            } else {
+                document.getElementById('admin-subtab-students').classList.add('hidden');
+                document.getElementById('admin-subtab-lessons').classList.remove('hidden');
+                document.getElementById('subtab-btn-students').className = "border-b-2 border-transparent px-6 py-3 font-medium text-sm text-slate-400 hover:text-slate-200 cursor-pointer";
+                document.getElementById('subtab-btn-lessons').className = "border-b-2 border-cyan-500 px-6 py-3 font-semibold text-sm text-cyan-400 cursor-pointer";
+            }
+        }
+
+        // 3. REALTIME DATABASE LISTENERS
         db.ref("students").on("value", (snapshot) => {
             allStudents = [];
             snapshot.forEach(child => {
@@ -342,7 +394,6 @@
             if (loggedInStudent) renderStudentLessons(loggedInStudent.grade);
         });
 
-        // Friday Fees Logic
         function processFridayFeesForOne(student) {
             let today = new Date();
             let regDateObj = new Date(student.regDate || today.toISOString().split('T')[0]);
@@ -366,62 +417,22 @@
             }
         }
 
-        // 3. TABS
-        function switchTab(tabName) {
-            ['view-home', 'view-student-portal', 'view-admin-gate', 'view-admin-dashboard'].forEach(v => {
-                document.getElementById(v).classList.add('hidden');
-            });
-            
-            if(tabName === 'view-admin-dashboard') {
-                if(auth.currentUser) document.getElementById('view-admin-dashboard').classList.remove('hidden');
-                else document.getElementById('view-admin-gate').classList.remove('hidden');
-            } else {
-                document.getElementById(tabName).classList.remove('hidden');
-            }
-            
-            ['tab-home', 'tab-student-portal', 'tab-admin-gate'].forEach(b => {
-                let btn = document.getElementById(b);
-                if(btn) {
-                    btn.classList.remove('bg-indigo-600', 'text-white', 'shadow');
-                    btn.classList.add('text-slate-400');
-                }
-            });
-            let activeBtn = tabName.replace('view-', 'tab-');
-            if(document.getElementById(activeBtn)) document.getElementById(activeBtn).classList.add('bg-indigo-600', 'text-white', 'shadow');
-        }
-
-        function switchAdminSubTab(subTabName) {
-            if (subTabName === 'students') {
-                document.getElementById('admin-subtab-students').classList.remove('hidden');
-                document.getElementById('admin-subtab-lessons').classList.add('hidden');
-                document.getElementById('subtab-btn-students').className = "border-b-2 border-cyan-500 px-6 py-3 font-semibold text-sm text-cyan-400";
-                document.getElementById('subtab-btn-lessons').className = "border-b-2 border-transparent px-6 py-3 font-medium text-sm text-slate-400 hover:text-slate-200";
-            } else {
-                document.getElementById('admin-subtab-students').classList.add('hidden');
-                document.getElementById('admin-subtab-lessons').classList.remove('hidden');
-                document.getElementById('subtab-btn-students').className = "border-b-2 border-transparent px-6 py-3 font-medium text-sm text-slate-400 hover:text-slate-200";
-                document.getElementById('subtab-btn-lessons').className = "border-b-2 border-cyan-500 px-6 py-3 font-semibold text-sm text-cyan-400";
-            }
-        }
-
-        // 4. AUTH ADMIN
+        // 4. ADMIN AUTHENTICATION
         function handleAdminLogin(e) {
             e.preventDefault();
             const email = document.getElementById('adminEmail').value;
             const password = document.getElementById('adminPassword').value;
             auth.signInWithEmailAndPassword(email, password)
-                .then(() => switchTab('view-admin-dashboard'))
-                .catch((err) => alert("දෝෂයක්: " + err.message));
+                .then(() => switchTab('admin-dashboard'))
+                .catch((err) => alert("දෝෂයක්: මුරපදය හෝ ඊමේල් ලිපිනය වැරදියි."));
         }
 
         function logoutAdmin() {
-            auth.signOut().then(() => switchTab('view-home'));
+            auth.signOut().then(() => switchTab('home'));
         }
 
         auth.onAuthStateChanged((user) => {
-            if (user) {
-                allStudents.forEach(s => processFridayFeesForOne(s));
-            }
+            if (user) allStudents.forEach(s => processFridayFeesForOne(s));
         });
 
         // 5. REGISTRATION
@@ -499,7 +510,6 @@
             }
 
             filtered.forEach(l => {
-                // PDF සහ Video බොත්තම් හදන තැන
                 let pdfBtn = l.pdf ? `<a href="${encodeURI(l.pdf)}" target="_blank" class="bg-slate-800 text-slate-200 px-3 py-2 rounded-lg border border-slate-700 hover:bg-slate-700"><i class="fa-solid fa-file-pdf text-rose-400 mr-1"></i> ටියුට් එක</a>` : '';
                 let vidBtn = l.video ? `<a href="${encodeURI(l.video)}" target="_blank" class="bg-indigo-600 text-white px-3 py-2 rounded-lg hover:bg-indigo-500"><i class="fa-solid fa-circle-play text-cyan-300 mr-1"></i> වීඩියෝව</a>` : '';
 
@@ -518,7 +528,7 @@
             });
         }
 
-        // 7. ADMIN FUNCTIONS
+        // 7. ADMIN DASHBOARD FUNCTIONS
         function renderAdminStudentsTable() {
             const searchKeyword = document.getElementById('adminStudentSearch').value.toLowerCase().trim();
             const tbody = document.getElementById('studentsTableBody');
@@ -599,7 +609,7 @@
             if (confirm("සිසුවා ඉවත් කිරීමට අවශ්‍යද?")) db.ref("students/" + id).remove();
         }
 
-        // 8. LESSONS MANAGEMENT
+        // 8. LESSON UPLOAD & GRID
         async function handleLessonUpload(e) {
             e.preventDefault();
             const title = document.getElementById('lesTitle').value.trim();
@@ -622,13 +632,20 @@
             const grid = document.getElementById('adminLessonsGrid');
             grid.innerHTML = '';
             allLessons.forEach(l => {
+                let pdfIcon = l.pdf ? `<a href="${encodeURI(l.pdf)}" target="_blank" class="text-rose-400 text-lg hover:text-rose-300" title="PDF බලන්න"><i class="fa-solid fa-file-pdf"></i></a>` : '';
+                let videoIcon = l.video ? `<a href="${encodeURI(l.video)}" target="_blank" class="text-cyan-400 text-lg hover:text-cyan-300" title="වීඩියෝව බලන්න"><i class="fa-solid fa-circle-play"></i></a>` : '';
+                
                 grid.innerHTML += `
-                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3 relative text-xs">
-                        <div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 relative text-xs flex flex-col justify-between shadow-lg">
+                        <div class="mb-3">
                             <span class="bg-cyan-500/10 text-cyan-400 text-[10px] font-bold px-2 py-0.5 rounded">${escapeHTML(l.grade)} ශ්‍රේණිය</span>
-                            <h4 class="font-bold text-slate-200 text-sm mt-1">${escapeHTML(l.title)}</h4>
+                            <h4 class="font-bold text-slate-200 text-sm mt-2">${escapeHTML(l.title)}</h4>
                         </div>
-                        <button onclick="deleteLesson('${escapeHTML(l.id)}')" class="absolute top-2 right-2 text-slate-500 hover:text-rose-400 cursor-pointer"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                        <div class="flex gap-4 items-center mt-2 border-t border-slate-800 pt-2">
+                            ${pdfIcon}
+                            ${videoIcon}
+                        </div>
+                        <button onclick="deleteLesson('${escapeHTML(l.id)}')" class="absolute top-2 right-2 bg-rose-950/40 p-1.5 rounded-lg text-rose-500 hover:text-rose-400 cursor-pointer"><i class="fa-solid fa-trash-can text-xs"></i></button>
                     </div>
                 `;
             });
