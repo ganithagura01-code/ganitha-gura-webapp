@@ -25,42 +25,59 @@
                 </div>
                 <div>
                     <h1 class="text-lg font-bold tracking-wide bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">GANITHA-GURA</h1>
-                    <p class="text-[10px] text-slate-400 tracking-wider font-semibold uppercase">Premium LMS</p>
                 </div>
             </div>
             <div class="flex flex-wrap lg:flex-nowrap items-center justify-center gap-2 bg-slate-950/60 p-1.5 rounded-xl border border-slate-800 w-full lg:w-auto">
-                <button onclick="switchTab('home')" id="tab-home" class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow text-center cursor-pointer min-w-[140px]"><span>REGISTER</span></button>
-                <button onclick="switchTab('student-portal')" id="tab-student-portal" class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-400 hover:text-slate-200 text-center cursor-pointer min-w-[140px]"><span>STUDENT</span></button>
-                <button onclick="switchTab('admin-gate')" id="tab-admin" class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-400 hover:text-slate-200 text-center cursor-pointer min-w-[140px]"><span>TEACHER</span></button>
+                <button onclick="switchTab('home')" id="tab-home" class="flex-1 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow">REGISTER</button>
+                <button onclick="switchTab('student-portal')" id="tab-student-portal" class="flex-1 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-400 hover:text-slate-200">STUDENT</button>
+                <button onclick="switchTab('admin-gate')" id="tab-admin" class="flex-1 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-400 hover:text-slate-200">TEACHER</button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
         <section id="view-home" class="space-y-8">
-            <div class="bg-gradient-to-br from-slate-900 to-slate-800/50 rounded-2xl p-6 border border-slate-800 shadow-xl">
-                <h2 class="text-2xl font-bold">ගණිතයේ විශිෂ්ටයෙකු වීමට ක්‍රමවත් පියවරක්.</h2>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                <h2 class="text-2xl font-bold">සිසුන් ලියාපදිංචි කිරීමේ පෝරමය</h2>
+                <form id="regForm" onsubmit="handleRegistration(event)" class="grid sm:grid-cols-2 gap-5 mt-4 text-sm">
+                    <input type="text" id="regName" required placeholder="නම" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white">
+                    <select id="regGrade" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white">
+                        <option value="6">6 ශ්‍රේණිය</option><option value="7">7 ශ්‍රේණිය</option><option value="8">8 ශ්‍රේණිය</option>
+                        <option value="9">9 ශ්‍රේණිය</option><option value="10">10 ශ්‍රේණිය</option><option value="11">11 ශ්‍රේණිය</option>
+                    </select>
+                    <input type="text" id="regSchool" required placeholder="පාසල" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white">
+                    <input type="tel" id="regPhone" required placeholder="දුරකථන අංකය" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white">
+                    <button type="submit" class="sm:col-span-2 w-full bg-indigo-600 py-3 rounded-xl font-bold">ලියාපදිංචි වන්න</button>
+                </form>
             </div>
-            </section>
+        </section>
 
         <section id="view-student-portal" class="hidden max-w-2xl mx-auto space-y-8">
-             </section>
+            <div id="studentLoginBox" class="bg-slate-900 p-8 rounded-2xl">
+                 <input type="text" id="studentLoginId" placeholder="GG-XXXX" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl text-white">
+                 <button onclick="handleStudentLogin(event)" class="w-full bg-indigo-600 mt-4 py-3 rounded-xl font-bold">පිවිසෙන්න</button>
+            </div>
+            <div id="student-dashboard" class="hidden"></div>
+        </section>
 
         <section id="view-admin-gate" class="hidden max-w-md mx-auto">
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl space-y-6">
-                <h3 class="text-xl font-bold text-center text-white">ගුරු පරිපාලන පිවිසුම</h3>
+                <h3 class="text-xl font-bold text-center">ගුරු පරිපාලන පිවිසුම</h3>
                 <input type="email" id="adminEmail" placeholder="ඊමේල් එක" class="w-full p-3 bg-slate-800 rounded border border-slate-700 text-white">
                 <input type="password" id="adminPassword" placeholder="මුරපදය" class="w-full p-3 bg-slate-800 rounded border border-slate-700 text-white">
-                <button onclick="loginAdmin()" class="w-full bg-cyan-600 py-3 rounded text-white font-bold cursor-pointer hover:bg-cyan-500">පිවිසෙන්න</button>
+                <button onclick="loginAdmin()" class="w-full bg-cyan-600 py-3 rounded text-white font-bold hover:bg-cyan-500">පිවිසෙන්න</button>
             </div>
         </section>
 
         <section id="view-admin-dashboard" class="hidden space-y-8">
-             </section>
+            <button onclick="logoutAdmin()" class="bg-slate-800 px-4 py-2 rounded-xl text-xs">ඉවත් වන්න</button>
+            <div id="studentsTableBody"></div>
+            <div id="adminLessonsGrid"></div>
+            </section>
     </main>
 
     <script>
-        // 1. FIREBASE CONFIG
+        // FIREBASE CONFIG
         const firebaseConfig = {
            apiKey: "AIzaSyDqH2onBtKBcF9Yccpt7fHDNZOwcJDRIDk",
            authDomain: "ganitha-gura.firebaseapp.com",
@@ -73,13 +90,13 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // 2. AUTH LOGIC
+        // AUTH LOGIC
         function loginAdmin() {
             const email = document.getElementById('adminEmail').value;
             const password = document.getElementById('adminPassword').value;
             firebase.auth().signInWithEmailAndPassword(email, password)
-                .then(() => { alert("සාර්ථකයි!"); window.location.reload(); })
-                .catch((err) => { alert("දෝෂයක්: " + err.message); });
+                .then(() => { window.location.reload(); })
+                .catch((err) => { alert(err.message); });
         }
 
         function logoutAdmin() {
@@ -98,7 +115,7 @@
             }
         });
 
-        // 3. NAVIGATION
+        // NAVIGATION
         function switchTab(tabName) {
             const views = ['home', 'student-portal', 'admin-gate', 'admin-dashboard'];
             views.forEach(v => {
@@ -109,10 +126,790 @@
             if(target) target.classList.remove('hidden');
         }
 
-        // 4. ORIGINAL FUNCTIONS (ඔබේ පැරණි කෝඩ් එකේ තිබූ සියලුම functions)
-        // (මම කලින් දුන් කෝඩ් කොටසේ තිබූ handleRegistration, renderStudentsTable, ආදී සියල්ල මෙතනට ඇතුළත් වේ)
-        // [ඔබේ පද්ධතියේ ක්‍රියාකාරීත්වයන් සියල්ල මෙතනට එකතු කර ඇත]
+        <!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GANITHA-GURA (ගුරුගේ) — LMS</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&family=Poppins:wght@400;600;700;800&display=swap');
+        body {
+            font-family: 'Poppins', 'Noto Sans Sinhala', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+
+    <nav class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40 px-4 py-3 shadow-lg">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white h-10 w-10 rounded-xl flex items-center justify-center shadow-md shadow-indigo-500/20">
+                    <i class="fa-solid fa-pi text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-wide bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">GANITHA-GURA</h1>
+                    <p class="text-[10px] text-slate-400 tracking-wider font-semibold uppercase">Premium LMS</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap lg:flex-nowrap items-center justify-center gap-2 bg-slate-950/60 p-1.5 rounded-xl border border-slate-800 w-full lg:w-auto">
+                <button onclick="switchTab('home')" id="tab-home" class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all duration-200 bg-indigo-600 text-white shadow text-center flex flex-col items-center justify-center cursor-pointer min-w-[140px]">
+                    <span>REGISTER - ලියාපදිංචි</span>
+                    <span class="text-[10px] opacity-80 font-normal mt-0.5">(ලියාපදිංචි අංකය නොමැති සිසුන්)</span>
+                </button>
+                
+                <button onclick="switchTab('student-portal')" id="tab-student-portal" class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-200 text-center flex flex-col items-center justify-center cursor-pointer min-w-[140px]">
+                    <span>STUDENT - සිසුන්</span>
+                </button>
+                
+                <button onclick="switchTab('admin-gate')" id="tab-admin-gate" class="flex-1 lg:flex-none px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold text-slate-400 hover:text-slate-200 transition-all duration-200 text-center flex flex-col items-center justify-center cursor-pointer min-w-[140px]">
+                    <span>TEACHER - ගුරුවරයා</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+        <div class="bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950/70 border border-slate-800/80 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.12),transparent_50%)]"></div>
+            <div class="absolute left-12 top-4 text-slate-800/10 text-7xl font-extrabold font-mono select-none pointer-events-none">f(x)</div>
+            <div class="absolute right-1/3 bottom-2 text-slate-800/10 text-8xl font-extrabold font-mono select-none pointer-events-none">∑</div>
+            <div class="absolute left-1/2 top-2 text-slate-800/5 text-6xl font-extrabold font-mono select-none pointer-events-none">√x</div>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-5 z-10 text-center sm:text-left">
+                <div class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white h-16 w-16 rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-500/30 border border-indigo-400/20 text-3xl animate-pulse">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-slate-100 via-indigo-200 to-cyan-300 bg-clip-text text-transparent">
+                        GANITHA-GURA <span class="text-indigo-400 font-bold font-sans">(ගුරුගේ)</span>
+                    </h1>
+                    <p class="text-slate-400 text-xs md:text-sm mt-1 font-medium tracking-wide">6 ශ්‍රේණියේ සිට 11 ශ්‍රේණිය දක්වා සිසුන් සඳහාම වෙන්වූ සුවිශේෂී ගණිත අධ්‍යාපන පද්ධතිය</p>
+                </div>
+            </div>
+            
+            <div class="z-10 bg-slate-900/90 backdrop-blur-sm px-5 py-3 rounded-2xl border border-slate-800 text-center md:text-right min-w-[160px]">
+                <span class="text-[11px] text-indigo-400 font-bold uppercase tracking-widest block mb-0.5">LMS PLATFORM</span>
+                <span class="text-xs text-emerald-400 font-mono font-bold flex items-center justify-center md:justify-end gap-1.5">
+                    <span class="h-2 w-2 rounded-full bg-emerald-500 inline-block animate-ping"></span> ONLINE
+                </span>
+            </div>
+        </div>
+
+        <section id="view-home" class="space-y-8">
+            <div class="bg-gradient-to-br from-slate-900 to-slate-800/50 rounded-2xl p-6 border border-slate-800 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 text-slate-800/15 text-8xl font-black pointer-events-none select-none">6-11</div>
+                <div class="max-w-2xl space-y-3">
+                    <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[11px] px-3 py-1 rounded-full font-bold uppercase tracking-wider">නව වාරය සඳහා ලියාපදිංචිය</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold leading-tight">ගණිතයේ විශිෂ්ටයෙකු වීමට ක්‍රමවත් පියවරක්.</h2>
+                    <p class="text-slate-400 text-sm">පහත පෝරමය පුරවා පද්ධතියට ඇතුළත් වීමට අවශ්‍ය ශිෂ්‍ය අංකය (Register ID) ක්ෂණිකව ලබාගන්න.</p>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 items-start">
+                <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 space-y-4">
+                    <h3 class="font-bold text-base text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-indigo-400"></i> ලියාපදිංචි වීමේ උපදෙස්
+                    </h3>
+                    <ul class="space-y-3 text-xs sm:text-sm text-slate-400">
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1 text-xs"></i> <span>සියලුම විස්තර නිවැරදිව ඇතුළත් කරන්න.</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1 text-xs"></i> <span>ලියාපදිංචි වූ පසු ලැබෙන <b>ශිෂ්‍ය අංකය (Register ID)</b> සුරක්ෂිතව තබා ගන්න.</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1 text-xs"></i> <span>සෑම සිකුරාදා දිනකම පන්ති ගාස්තුව ලෙස රු. 300 ක් ගිණුමට එකතු වේ.</span></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2 border-b border-slate-800 pb-4">
+                        <i class="fa-solid fa-user-plus text-indigo-400"></i> සිසුන් ලියාපදිංචි කිරීමේ පෝරමය
+                    </h3>
+                    <form id="regForm" onsubmit="handleRegistration(event)" class="grid sm:grid-cols-2 gap-5 text-sm">
+                        <div class="sm:col-span-2 space-y-2">
+                            <label class="font-medium text-slate-300">සිසුවාගේ සම්පූර්ණ නම (Full Name) *</label>
+                            <input type="text" id="regName" required placeholder="උදා: නිමේෂා ගුරුගේ" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-medium text-slate-300">ශ්‍රේණිය (Grade) *</label>
+                            <select id="regGrade" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-indigo-500">
+                                <option value="" disabled selected>... ශ්‍රේණිය තෝරන්න ...</option>
+                                <option value="6">6 ශ්‍රේණිය</option>
+                                <option value="7">7 ශ්‍රේණිය</option>
+                                <option value="8">8 ශ්‍රේණිය</option>
+                                <option value="9">9 ශ්‍රේණිය</option>
+                                <option value="10">10 ශ්‍රේණිය</option>
+                                <option value="11">11 ශ්‍රේණිය</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-medium text-slate-300">පාසල (School) *</label>
+                            <input type="text" id="regSchool" required placeholder="උදා: මලියදේව විද්‍යාලය" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="sm:col-span-2 space-y-2">
+                            <label class="font-medium text-slate-300">දුරකථන අංකය *</label>
+                            <input type="tel" id="regPhone" required placeholder="උදා: 07XXXXXXXX" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="sm:col-span-2 pt-2">
+                            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer">
+                                <i class="fa-solid fa-address-card"></i> ලියාපදිංචි වී අංකය ලබාගන්න
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-student-portal" class="hidden max-w-2xl mx-auto space-y-8">
+            <div id="studentLoginBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="bg-indigo-500/10 text-indigo-400 p-3 rounded-full w-14 h-14 flex items-center justify-center mx-auto border border-indigo-500/20">
+                        <i class="fa-solid fa-lock-open text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">ශිෂ්‍ය ද්වාරය වෙත පිවිසීම</h3>
+                    <p class="text-slate-400 text-xs">ලියාපදිංචි වීමේදී ඔබට ලැබුණු GG-XXXX අංකය ඇතුළත් කරන්න.</p>
+                </div>
+                <form onsubmit="handleStudentLogin(event)" class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-300">Let's Sign In</label>
+                        <input type="text" id="studentLoginId" required placeholder="GG-1001" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-center text-xl font-bold tracking-widest text-indigo-400 uppercase focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl shadow-lg cursor-pointer">
+                        ඇතුළු වන්න <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div id="student-dashboard" class="hidden space-y-8">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-lg">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-200" id="studentWelcomeName">ආයුබෝවන්, සිසුවා!</h3>
+                        <p class="text-sm text-slate-400" id="studentWelcomeMeta">පන්තිය: - | අංකය: -</p>
+                    </div>
+                    <button onclick="logoutStudent()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-xl border border-slate-700 cursor-pointer">
+                        <i class="fa-solid fa-sign-out mr-1"></i> පද්ධතියෙන් ඉවත් වන්න
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center gap-4">
+                        <div class="bg-emerald-500/10 text-emerald-400 p-3 rounded-xl text-xl"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-400">පැමිණි දින ගණන</p>
+                            <p class="text-lg font-bold text-slate-100" id="stCardAttendance">0 දින</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center gap-4">
+                        <div class="bg-blue-500/10 text-blue-400 p-3 rounded-xl text-xl"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-400">ගෙවා ඇති මුදල</p>
+                            <p class="text-lg font-bold text-slate-100" id="stCardPaid">රු. 0</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center gap-4">
+                        <div class="bg-rose-500/10 text-rose-400 p-3 rounded-xl text-xl"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-400">ගෙවීමට ඉතිරි මුදල</p>
+                            <p class="text-lg font-bold" id="stCardBalance">රු. 0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-base text-slate-300 border-b border-slate-800 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-indigo-400"></i> ඔබට අදාළ පාඩම් සහ වීඩියෝ නිබන්ධන
+                    </h4>
+                    <div id="studentLessonsContainer" class="grid gap-4"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-admin-gate" class="hidden max-w-md mx-auto">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="bg-cyan-500/10 text-cyan-400 p-3 rounded-full w-14 h-14 flex items-center justify-center mx-auto border border-cyan-500/20">
+                        <i class="fa-solid fa-shield-halved text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">පරිපාලන අංශයට පිවිසීම</h3>
+                    <p class="text-slate-400 text-xs">ආරක්ෂිත මුරපදය (Teacher Password) ඇතුළත් කරන්න.</p>
+                </div>
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-300">රහස් මුරපදය (Password)</label>
+                        <input type="password" id="adminPassword" required placeholder="••••••••" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-center text-lg text-cyan-400 focus:outline-none tracking-widest">
+                    </div>
+                    <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl shadow-lg cursor-pointer">
+                        තහවුරු කරන්න <i class="fa-solid fa-right-to-bracket ml-1"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="view-admin-dashboard" class="hidden space-y-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md">
+                <div>
+                    <h2 class="text-xl font-bold text-cyan-400 flex items-center gap-2">
+                        <i class="fa-solid fa-toolbox"></i> ගුරු පරිපාලන පැනලය
+                    </h2>
+                    <p class="text-slate-400 text-xs">සිසුන්ගේ පැමිණීම්, ගෙවීම් සහ පාඩම් එක්කිරීම් මෙතැනින් සිදුකරන්න.</p>
+                </div>
+                <button onclick="logoutAdmin()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-xl border border-slate-700 cursor-pointer">
+                    පැනලයෙන් ඉවත් වන්න <i class="fa-solid fa-lock ml-1"></i>
+                </button>
+            </div>
+
+            <div class="flex border-b border-slate-800 gap-2">
+                <button id="subtab-btn-students" onclick="switchAdminSubTab('students')" class="border-b-2 border-cyan-500 px-6 py-3 font-semibold text-sm text-cyan-400 cursor-pointer">
+                    <i class="fa-solid fa-users mr-1"></i> සිසුන් සහ ගෙවීම්
+                </button>
+                <button id="subtab-btn-lessons" onclick="switchAdminSubTab('lessons')" class="border-b-2 border-transparent px-6 py-3 font-medium text-sm text-slate-400 hover:text-slate-200 cursor-pointer">
+                    <i class="fa-solid fa-cloud-arrow-up mr-1"></i> පාඩම් එක්කිරීම්
+                </button>
+            </div>
+
+            <div id="admin-subtab-students" class="space-y-6">
+                <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="relative w-full md:w-96">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="adminStudentSearch" oninput="renderAdminStudentsTable()" placeholder="නම හෝ ශිෂ්‍ය අංකය මඟින් සොයන්න..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-200 focus:outline-none focus:border-cyan-500">
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[800px]">
+                            <thead>
+                                <tr class="bg-slate-950 border-b border-slate-800 text-slate-300 font-semibold text-xs uppercase">
+                                    <th class="p-4 text-center">ID / ලියාපදිංචි දිනය</th>
+                                    <th class="p-4">සිසුවාගේ විස්තර</th>
+                                    <th class="p-4 text-center">පැමිණීම (අද)</th>
+                                    <th class="p-4 text-center">... ගාස්තු ලේඛනය (රු.) ...</th>
+                                    <th class="p-4 text-center">ක්‍රියාකාරකම්</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="admin-subtab-lessons" class="hidden grid lg:grid-cols-3 gap-8 items-start">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+                    <h3 class="text-base font-bold border-b border-slate-800 pb-3 text-slate-200">
+                        <i class="fa-solid fa-plus-circle text-cyan-400"></i> නව පාඩමක් ඇතුළත් කිරීම
+                    </h3>
+                    <form id="lessonForm" onsubmit="handleLessonUpload(event)" class="space-y-4 text-sm">
+                        <div class="space-y-2">
+                            <label class="font-medium text-slate-300">පාඩමේ මාතෘකාව *</label>
+                            <input type="text" id="lesTitle" required placeholder="උදා: වර්ගමූල සෙවීම" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-medium text-slate-300">අදාළ ශ්‍රේණිය *</label>
+                            <select id="lesGrade" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-cyan-500">
+                                <option value="" disabled selected>ශ්‍රේණිය තෝරන්න</option>
+                                <option value="6">6 ශ්‍රේණිය</option>
+                                <option value="7">7 ශ්‍රේණිය</option>
+                                <option value="8">8 ශ්‍රේණිය</option>
+                                <option value="9">9 ශ්‍රේණිය</option>
+                                <option value="10">10 ශ්‍රේණිය</option>
+                                <option value="11">11 ශ්‍රේණිය</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-medium text-slate-300">නිබන්ධන ලින්ක් එක (Google Drive PDF)</label>
+                            <input type="url" id="lesPdf" placeholder="https://drive.google.com/..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-medium text-slate-300">වීඩියෝ ලින්ක් එක (YouTube / Drive Video)</label>
+                            <input type="url" id="lesVideo" placeholder="https://youtube.com/watch?v=..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none">
+                        </div>
+                        <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl transition-all cursor-pointer">
+                            සුරැකීමට එක් කරන්න <i class="fa-solid fa-square-plus ml-1"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="lg:col-span-2 space-y-4">
+                    <h3 class="text-base font-bold text-slate-300 border-b border-slate-800 pb-2">
+                        <i class="fa-solid fa-film text-cyan-400"></i> ඇතුළත් කර ඇති සමස්ත පාඩම් මාලාව
+                    </h3>
+                    <div id="adminLessonsGrid" class="grid sm:grid-cols-2 gap-4"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-20 bg-slate-950 border-t border-slate-900 py-6 text-center text-xs text-slate-600">
+        &copy; 2026 GANITHA-GURA (ගුරුගේ) අධ්‍යාපන ආයතනය. සියලුම හිමිකම් ඇවිරිණි.
+    </footer>
+
+    <div id="successModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-sm w-full text-center space-y-6 shadow-2xl">
+            <div class="bg-emerald-500/10 text-emerald-400 p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold text-slate-100">ලියාපදිංචිය සාර්ථකයි!</h4>
+                <p class="text-slate-400 text-xs mt-1">මෙම ශිෂ්‍ය අංකය භාවිත කර ශිෂ්‍ය පිවිසුමෙන් ඇතුල් වන්න.</p>
+            </div>
+            <div class="bg-slate-950 border border-dashed border-slate-800 rounded-xl p-4 text-left font-mono space-y-2 text-xs">
+                <div class="text-center font-bold text-sm text-indigo-400 mb-2">GANITHA GURA LMS</div>
+                <div class="flex justify-between"><span># ශිෂ්‍ය අංකය:</span> <span class="font-bold text-emerald-400 text-sm" id="recId">-</span></div>
+                <div class="flex justify-between"><span>නම:</span> <span class="font-bold text-slate-100" id="recName">-</span></div>
+                <div class="flex justify-between"><span>ශ්‍රේණිය:</span> <span id="recGrade">-</span></div>
+                <div class="flex justify-between"><span>පාසල:</span> <span id="recSchool">-</span></div>
+            </div>
+            <button onclick="closeSuccessModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2.5 rounded-xl border border-slate-700 cursor-pointer">
+                පිටුව වසා ඉදිරියට යන්න
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 1. FIREBASE CONFIGURATION
+        const firebaseConfig = {
+           apiKey: "AIzaSyDqH2onBtKBcF9Yccpt7fHDNZOwcJDRIDk",
+           authDomain: "ganitha-gura.firebaseapp.com",
+           databaseURL: "https://ganitha-gura-default-rtdb.firebaseio.com",
+           projectId: "ganitha-gura",
+           storageBucket: "ganitha-gura.firebasestorage.app",
+           messagingSenderId: "477992277636",
+           appId: "1:477992277636:web:e25ba0f503cfa2a32194d1"
+        };
+
+        try {
+            firebase.initializeApp(firebaseConfig);
+            var db = firebase.database();
+            console.log("Firebase Realtime Database Connected Successfully.");
+        } catch (e) {
+            alert("Firebase සම්බන්ධතාවය අසාර්ථකයි!");
+            console.error(e);
+        }
+
+        let allStudents = [];
+        let allLessons = [];
+        let loggedInStudent = null;
+        let isAdminAuthenticated = false;
+
+        // XSS ATTACK MITIGATION: Input Sanitization Helper Function
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // 2. REALTIME ENGINE LISTENERS
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!db) return;
+
+            db.ref("students").on("value", (snapshot) => {
+                allStudents = [];
+                snapshot.forEach(childSnapshot => {
+                    let data = childSnapshot.val();
+                    if (data) {
+                        data.attendance = Array.isArray(data.attendance) ? data.attendance : (data.attendance ? Object.values(data.attendance) : []);
+                        data.chargedFridays = Array.isArray(data.chargedFridays) ? data.chargedFridays : (data.chargedFridays ? Object.values(data.chargedFridays) : []);
+                        allStudents.push({ id: childSnapshot.key, ...data });
+                    }
+                });
+                renderAdminStudentsTable();
+                if (loggedInStudent) {
+                    updateStudentDashboardUI();
+                }
+            });
+
+            db.ref("lessons").on("value", (snapshot) => {
+                allLessons = [];
+                snapshot.forEach(childSnapshot => {
+                    let data = childSnapshot.val();
+                    if (data) {
+                        allLessons.push({ id: childSnapshot.key, ...data });
+                    }
+                });
+                renderAdminLessonsGrid();
+                if (loggedInStudent) {
+                    renderStudentLessons(loggedInStudent.grade);
+                }
+            });
+        });
+
+        // FRIDAY AUTO FEE LOGIC
+        function processFridayFeesForOne(student) {
+            let today = new Date();
+            let regDateObj = new Date(student.regDate || today.toISOString().split('T')[0]);
+            let chargedFridays = [...(student.chargedFridays || [])];
+            let totalDue = student.totalDue !== undefined ? student.totalDue : 0;
+            let updated = false;
+
+            for (let d = new Date(regDateObj); d <= today; d.setDate(d.getDate() + 1)) {
+                if (d.getDay() === 5) {
+                    let fridayStr = d.toISOString().split('T')[0];
+                    if (!chargedFridays.includes(fridayStr)) {
+                        totalDue += 300;
+                        chargedFridays.push(fridayStr);
+                        updated = true;
+                    }
+                }
+            }
+
+            if (updated) {
+                let balance = totalDue - (student.amountPaid || 0);
+                db.ref("students/" + student.id).update({
+                    totalDue: totalDue,
+                    chargedFridays: chargedFridays,
+                    balance: balance
+                });
+            }
+        }
+
+        // NAVIGATION SYSTEM
+        function switchTab(tabName) {
+            if (tabName === 'admin-dashboard' && !isAdminAuthenticated) {
+                alert("ඇතුල්වීමට අවසර නැත! කරුණාකර මුරපදය ඇතුළත් කරන්න.");
+                switchTab('admin-gate');
+                return;
+            }
+
+            const views = ['home', 'student-portal', 'admin-gate', 'admin-dashboard'];
+            views.forEach(v => document.getElementById(`view-${v}`).classList.add('hidden'));
+            
+            const tabButtons = ['home', 'student-portal', 'admin-gate'];
+            tabButtons.forEach(b => {
+                document.getElementById(`tab-${b}`).classList.remove('bg-indigo-600', 'text-white', 'shadow');
+                document.getElementById(`tab-${b}`).classList.add('text-slate-400');
+            });
+
+            if (tabName === 'admin-dashboard') {
+                document.getElementById('view-admin-dashboard').classList.remove('hidden');
+                document.getElementById('tab-admin-gate').classList.add('bg-indigo-600', 'text-white', 'shadow');
+                allStudents.forEach(s => processFridayFeesForOne(s));
+            } else {
+                document.getElementById(`view-${tabName}`).classList.remove('hidden');
+                document.getElementById(`tab-${tabName}`).classList.add('bg-indigo-600', 'text-white', 'shadow');
+            }
+        }
+
+        function switchAdminSubTab(subTabName) {
+            if (subTabName === 'students') {
+                document.getElementById('admin-subtab-students').classList.remove('hidden');
+                document.getElementById('admin-subtab-lessons').classList.add('hidden');
+                document.getElementById('subtab-btn-students').className = "border-b-2 border-cyan-500 px-6 py-3 font-semibold text-sm text-cyan-400 cursor-pointer";
+                document.getElementById('subtab-btn-lessons').className = "border-b-2 border-transparent px-6 py-3 font-medium text-sm text-slate-400 hover:text-slate-200 cursor-pointer";
+            } else {
+                document.getElementById('admin-subtab-students').classList.add('hidden');
+                document.getElementById('admin-subtab-lessons').classList.remove('hidden');
+                document.getElementById('subtab-btn-students').className = "border-b-2 border-transparent px-6 py-3 font-medium text-sm text-slate-400 hover:text-slate-200 cursor-pointer";
+                document.getElementById('subtab-btn-lessons').className = "border-b-2 border-cyan-500 px-6 py-3 font-semibold text-sm text-cyan-400 cursor-pointer";
+            }
+        }
+
+        // REGISTRATION SYSTEM
+        async function handleRegistration(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const grade = document.getElementById('regGrade').value;
+            const school = document.getElementById('regSchool').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            
+            let nextId = "GG-1001";
+            if (allStudents.length > 0) {
+                const numericIds = allStudents.map(s => parseInt(s.id.replace('GG-', ''))).filter(n => !isNaN(n));
+                if (numericIds.length > 0) {
+                    nextId = `GG-${Math.max(...numericIds) + 1}`;
+                }
+            }
+            
+            const todayStr = new Date().toISOString().split('T')[0];
+            const newStudentData = {
+                name: name,
+                grade: grade,
+                school: school,
+                phone: phone,
+                regDate: todayStr,
+                totalDue: 0,
+                amountPaid: 0,
+                balance: 0,
+                attendance: [],
+                chargedFridays: []
+            };
+
+            try {
+                await db.ref("students/" + nextId).set(newStudentData);
+                document.getElementById('recId').innerText = nextId;
+                document.getElementById('recName').innerText = name;
+                document.getElementById('recGrade').innerText = `${grade} ශ්‍රේණිය`;
+                document.getElementById('recSchool').innerText = school;
+                
+                document.getElementById('successModal').classList.remove('hidden');
+                document.getElementById('regForm').reset();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // STUDENT AUTHS
+        function handleStudentLogin(e) {
+            e.preventDefault();
+            const inputId = document.getElementById('studentLoginId').value.trim().toUpperCase();
+            const student = allStudents.find(s => s.id === inputId);
+            
+            if (!student) {
+                alert("ඇතුළත් කළ ශිෂ්‍ය අංකය වැරදියි!");
+                return;
+            }
+
+            loggedInStudent = student;
+            processFridayFeesForOne(loggedInStudent);
+            updateStudentDashboardUI();
+        }
+
+        function updateStudentDashboardUI() {
+            if (!loggedInStudent) return;
+            const student = allStudents.find(s => s.id === loggedInStudent.id);
+            if (!student) return;
+
+            document.getElementById('studentLoginBox').classList.add('hidden');
+            document.getElementById('student-dashboard').classList.remove('hidden');
+            
+            document.getElementById('studentWelcomeName').innerText = `ආයුබෝවන්, ${student.name}!`;
+            document.getElementById('studentWelcomeMeta').innerText = `පන්තිය: ${student.grade} ශ්‍රේණිය | අංකය: ${student.id}`;
+            document.getElementById('stCardAttendance').innerText = `${student.attendance ? student.attendance.length : 0} දින`;
+            document.getElementById('stCardPaid').innerText = `රු. ${student.amountPaid || 0}`;
+            
+            const balanceElement = document.getElementById('stCardBalance');
+            const remainingBalance = student.balance !== undefined ? student.balance : 0;
+            balanceElement.innerText = `රු. ${remainingBalance}`;
+            balanceElement.className = remainingBalance > 0 ? "text-lg font-bold text-rose-400" : "text-lg font-bold text-emerald-400";
+
+            renderStudentLessons(student.grade);
+        }
+
+        function logoutStudent() {
+            loggedInStudent = null;
+            document.getElementById('student-dashboard').classList.add('hidden');
+            document.getElementById('studentLoginBox').classList.remove('hidden');
+            document.getElementById('studentLoginId').value = '';
+        }
+
+        function renderStudentLessons(grade) {
+            const container = document.getElementById('studentLessonsContainer');
+            container.innerHTML = '';
+            
+            const filtered = allLessons.filter(l => l.grade === grade);
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="text-center p-8 text-slate-500 text-xs">ඔබගේ ශ්‍රේණිය සඳහා තවමත් පාඩම් ඇතුළත් කර නොමැත.</div>`;
+                return;
+            }
+
+            filtered.forEach(l => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm";
+                card.innerHTML = `
+                    <div>
+                        <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-bold px-2 py-0.5 rounded">${escapeHTML(l.grade)} ශ්‍රේණිය</span>
+                        <h5 class="font-bold text-slate-200 mt-1">${escapeHTML(l.title)}</h5>
+                    </div>
+                    <div class="flex gap-2 w-full sm:w-auto text-xs">
+                        ${l.pdf ? `<a href="${encodeURI(l.pdf)}" target="_blank" class="bg-slate-800 text-slate-200 px-3 py-2 rounded-lg border border-slate-700"><i class="fa-solid fa-file-pdf text-rose-400 mr-1"></i> ටියුට් එක</a>` : ''}
+                        ${l.video ? `<a href="${encodeURI(l.video)}" target="_blank" class="bg-indigo-600 text-white px-3 py-2 rounded-lg"><i class="fa-solid fa-circle-play text-cyan-300 mr-1"></i> වීඩියෝව</a>` : ''}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // ADMIN LOGIN (With Base64 Obfuscated Code Protection)
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminPassword').value;
+            
+            // "R1VSQTIwMjY=" is the base64 equivalent of "GURA2026"
+            if (btoa(pass) === 'R1VSQTIwMjY=') {
+                isAdminAuthenticated = true;
+                switchTab('admin-dashboard');
+                document.getElementById('adminPassword').value = '';
+            } else {
+                alert("මුරපදය වැරදියි!");
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminAuthenticated = false;
+            switchTab('home');
+        }
+
+        // ADMIN TABLE PANEL BUILDER (Injected data is fully escaped against scripts)
+        function renderAdminStudentsTable() {
+            const searchKeyword = document.getElementById('adminStudentSearch').value.toLowerCase().trim();
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+
+            const filtered = allStudents.filter(s => s.id.toLowerCase().includes(searchKeyword) || s.name.toLowerCase().includes(searchKeyword));
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-500 text-xs">සිසුන් කිසිවෙකු හමුනොවීය.</td></tr>`;
+                return;
+            }
+
+            const todayStr = new Date().toISOString().split('T')[0];
+
+            filtered.forEach(s => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-slate-800/60 hover:bg-slate-900/40 text-xs sm:text-sm";
+                
+                const hasAttendedToday = s.attendance && s.attendance.includes(todayStr);
+                const totalAttendanceDays = s.attendance ? s.attendance.length : 0;
+                const totalDue = s.totalDue || 0;
+                const amountPaid = s.amountPaid || 0;
+                const balance = s.balance || 0;
+
+                tr.innerHTML = `
+                    <td class="p-4 text-center">
+                        <div class="font-mono font-bold text-cyan-400 bg-slate-950 px-2 py-1 rounded border border-slate-800 inline-block">${escapeHTML(s.id)}</div>
+                    </td>
+                    <td class="p-4">
+                        <div class="font-bold text-slate-200">${escapeHTML(s.name)}</div>
+                        <div class="text-[11px] text-slate-400">${escapeHTML(s.grade)} ශ්‍රේණිය | ${escapeHTML(s.school)} | ${escapeHTML(s.phone)}</div>
+                    </td>
+                    <td class="p-4 text-center space-y-1">
+                        <button onclick="toggleAttendance('${escapeHTML(s.id)}')" class="px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${hasAttendedToday ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}">
+                            <i class="fa-solid ${hasAttendedToday ? 'fa-user-check' : 'fa-user-clock'}"></i>
+                        </button>
+                        <div class="text-[10px] text-slate-500">පැමිණි දින: ${totalAttendanceDays}</div>
+                    </td>
+                    <td class="p-4 font-mono">
+                        <div class="w-40 mx-auto space-y-1 bg-slate-950 p-2 rounded-lg border border-slate-800 text-xs">
+                            <div class="flex justify-between"><span>මුළු:</span><span>රු.${totalDue}</span></div>
+                            <div class="flex justify-between text-emerald-400"><span>ගෙවූ:</span><span>රු.${amountPaid}</span></div>
+                            <div class="flex justify-between border-t border-slate-800/80 font-bold ${balance > 0 ? 'text-rose-400' : 'text-emerald-400'}"><span>හිඟ:</span><span>රු.${balance}</span></div>
+                        </div>
+                    </td>
+                    <td class="p-4 text-center">
+                        <div class="flex justify-center gap-1.5 flex-wrap text-xs">
+                            <button onclick="addPaymentPrompt('${escapeHTML(s.id)}')" class="bg-emerald-600 text-white px-2 py-1 rounded-lg cursor-pointer">ගෙවීම්</button>
+                            <button onclick="editTotalDuePrompt('${escapeHTML(s.id)}')" class="bg-amber-600 text-white px-2 py-1 rounded-lg cursor-pointer">ගාස්තු</button>
+                            <button onclick="deleteStudent('${escapeHTML(s.id)}')" class="bg-rose-950/40 text-rose-400 p-1 rounded-lg cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function toggleAttendance(studentId) {
+            const student = allStudents.find(s => s.id === studentId);
+            if (!student) return;
+
+            let attendance = student.attendance || [];
+            const todayStr = new Date().toISOString().split('T')[0];
+            const dateIndex = attendance.indexOf(todayStr);
+
+            if (dateIndex > -1) attendance.splice(dateIndex, 1);
+            else attendance.push(todayStr);
+
+            db.ref("students/" + studentId).update({ attendance: attendance });
+        }
+
+        function addPaymentPrompt(studentId) {
+            const student = allStudents.find(s => s.id === studentId);
+            if (!student) return;
+
+            const inputAmount = prompt(`${student.name} ගෙවූ මුදල ඇතුළත් කරන්න:`);
+            if (inputAmount === null) return;
+            const amount = parseFloat(inputAmount);
+
+            if (isNaN(amount) || amount <= 0) return;
+
+            let amountPaid = (student.amountPaid || 0) + amount;
+            let balance = (student.totalDue || 0) - amountPaid;
+
+            db.ref("students/" + studentId).update({ amountPaid, balance });
+        }
+
+        function editTotalDuePrompt(studentId) {
+            const student = allStudents.find(s => s.id === studentId);
+            if (!student) return;
+
+            const inputAmount = prompt(`${student.name} හි මුළු හිඟ මුදල සංශෝධනය කරන්න:`);
+            if (inputAmount === null) return;
+            const amount = parseFloat(inputAmount);
+
+            if (isNaN(amount) || amount < 0) return;
+
+            let totalDue = amount;
+            let balance = totalDue - (student.amountPaid || 0);
+
+            db.ref("students/" + studentId).update({ totalDue, balance });
+        }
+
+        // DELETE SYSTEM
+        function deleteStudent(id) {
+            if (confirm("මෙම සිසුවා ඉවත් කිරීමට අවශ්‍ය බව ස්ථිරද?")) {
+                db.ref("students/" + id).remove();
+            }
+        }
+
+        // LESSON SYSTEM
+        async function handleLessonUpload(e) {
+            e.preventDefault();
+            const title = document.getElementById('lesTitle').value.trim();
+            const grade = document.getElementById('lesGrade').value;
+            const pdf = document.getElementById('lesPdf').value.trim();
+            const video = document.getElementById('lesVideo').value.trim();
+
+            let nextLesId = "L-01";
+            if (allLessons.length > 0) {
+                const numericIds = allLessons.map(l => parseInt(l.id.replace('L-', ''))).filter(n => !isNaN(n));
+                if (numericIds.length > 0) {
+                    nextLesId = `L-${String(Math.max(...numericIds) + 1).padStart(2, '0')}`;
+                }
+            }
+            
+            try {
+                await db.ref("lessons/" + nextLesId).set({ title, grade, pdf, video });
+                document.getElementById('lessonForm').reset();
+                alert("පාඩම සාර්ථකව එක් කරන ලදී!");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function renderAdminLessonsGrid() {
+            const grid = document.getElementById('adminLessonsGrid');
+            grid.innerHTML = '';
+
+            allLessons.forEach(l => {
+                const block = document.createElement('div');
+                block.className = "bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3 relative text-xs";
+                block.innerHTML = `
+                    <div>
+                        <span class="bg-cyan-500/10 text-cyan-400 text-[10px] font-bold px-2 py-0.5 rounded">${escapeHTML(l.grade)} ශ්‍රේණිය</span>
+                        <h4 class="font-bold text-slate-200 text-sm mt-1">${escapeHTML(l.title)}</h4>
+                    </div>
+                    <button onclick="deleteLesson('${escapeHTML(l.id)}')" class="absolute top-2 right-2 text-slate-500 hover:text-rose-400 cursor-pointer"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                `;
+                grid.appendChild(block);
+            });
+        }
+
+        function deleteLesson(id) {
+            if (confirm("මෙම පාඩම ඉවත් කිරීමට අවශ්‍යද?")) {
+                db.ref("lessons/" + id).remove();
+            }
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
     </script>
 </body>
 </html>
+
